@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENKENITH® — THỜI TRANG ĐƯỜNG PHỐ & LƯU TRỮ ĐƯƠNG ĐẠI</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Space Grotesk & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- math.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.0/math.js"></script>
+
+    <!-- MathJax Configuration & CDN -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        zen: {
+                            black: '#0a0a0a',
+                            charcoal: '#141414',
+                            concrete: '#e5e5e5',
+                            ash: '#737373',
+                            offwhite: '#f7f7f5',
+                            accent: '#d4ff00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Editorial & Brutalist Custom Styles */
+        body {
+            background-color: #f7f7f5;
+            color: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Global Easing */
+        .smooth-ease {
+            transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 32s linear infinite;
+            will-change: transform;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Product Card Dual Image Hover */
+        .product-card {
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+        .product-card .secondary-img {
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .product-card:hover .secondary-img {
+            opacity: 1;
+            transform: scale(1.04);
+        }
+        .product-card .primary-img {
+            transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+        .product-card:hover .primary-img {
+            transform: scale(1.04);
+        }
+
+        /* Modal & Drawer Smooth Transitions */
+        .modal-backdrop-anim {
+            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-content-anim {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .drawer-anim {
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f7f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0a0a0a;
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            background: #0a0a0a;
+            cursor: pointer;
+            border-radius: 2px;
+            margin-top: -7px;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #1f1f1f;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #d4d4d4;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-zen-black selection:text-white">
+
+    <!-- ================= TOP ANNOUNCEMENT MARQUEE ================= -->
+    <div class="bg-zen-black text-white text-[11px] font-mono uppercase tracking-[0.2em] py-2.5 overflow-hidden border-b border-neutral-800 sticky top-0 z-50">
+        <div class="animate-marquee whitespace-nowrap">
+            <span class="mx-8">ZENKENITH® // BỘ SƯU TẬP LƯU TRỮ 01 "KHỐI ĐƠN THẠCH TĨNH LẶNG" — ĐÃ MỞ BÁN</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC CHO ĐƠN HÀNG TỪ 1.500.000₫</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">PHÒNG ĐO PHOM THUẬT TOÁN & XƯỞNG THIẾT KẾ ĐỘC BẢN 1-1</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">NHẬP MÃ [ZEN10] GIẢM NGAY 10% TOÀN BỘ SẢN PHẨM</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">ZENKENITH® // BỘ SƯU TẬP LƯU TRỮ 01 "KHỐI ĐƠN THẠCH TĨNH LẶNG" — ĐÃ MỞ BÁN</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC CHO ĐƠN HÀNG TỪ 1.500.000₫</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">PHÒNG ĐO PHOM THUẬT TOÁN & XƯỞNG THIẾT KẾ ĐỘC BẢN 1-1</span>
+            <span class="mx-8 text-neutral-400">•</span>
+            <span class="mx-8">NHẬP MÃ [ZEN10] GIẢM NGAY 10% TOÀN BỘ SẢN PHẨM</span>
+        </div>
+    </div>
+
+    <!-- ================= STICKY HEADER NAVIGATION ================= -->
+    <header class="sticky top-[37px] z-40 bg-zen-offwhite/90 backdrop-blur-md border-b border-zen-black/15">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
+            <!-- Left Navigation -->
+            <nav class="hidden lg:flex items-center space-x-7 text-xs font-mono uppercase tracking-widest">
+                <a href="#catalog" onclick="filterByCategory('ALL')" class="hover:line-through smooth-ease">Tất Cả</a>
+                <a href="#catalog" onclick="filterByCategory('TOPS')" class="hover:line-through smooth-ease">Áo Thun Dày</a>
+                <a href="#catalog" onclick="filterByCategory('OUTERWEAR')" class="hover:line-through smooth-ease">Áo Khoác</a>
+                <a href="#fit-lab" class="hover:line-through smooth-ease flex items-center gap-1.5">
+                    <span>Phòng Đo Size</span>
+                    <span class="bg-zen-black text-white text-[9px] px-1.5 py-0.5 rounded-sm">CHUẨN RẬP</span>
+                </a>
+                <a href="#custom-studio" class="hover:line-through smooth-ease flex items-center gap-1.5">
+                    <span>Xưởng Thiết Kế</span>
+                    <span class="border border-zen-black text-[9px] px-1.5 py-0.5 rounded-sm">1/1</span>
+                </a>
+                <a href="#lookbook" class="hover:line-through smooth-ease">Tạp Chí 01</a>
+            </nav>
+
+            <!-- Mobile Menu Trigger -->
+            <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 text-zen-black" aria-label="Trình đơn">
+                <i class="fa-solid fa-bars-staggered text-lg"></i>
+            </button>
+
+            <!-- Brand Logo Center -->
+            <a href="#" class="font-display font-bold text-2xl sm:text-3xl tracking-[-0.06em] uppercase flex items-center gap-1">
+                ZENKENITH<span class="text-xs font-mono font-normal align-top">®</span>
+            </a>
+
+            <!-- Right Controls: Search, Wishlist, Cart -->
+            <div class="flex items-center space-x-4 sm:space-x-6 text-xs font-mono uppercase tracking-wider">
+                <!-- Search Input Desktop -->
+                <div class="hidden md:flex items-center border-b border-zen-black/40 focus-within:border-zen-black py-1 smooth-ease">
+                    <i class="fa-solid fa-magnifying-glass text-[11px] mr-2 text-neutral-500"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        oninput="handleSearch(this.value)"
+                        placeholder="TÌM SẢN PHẨM..." 
+                        class="bg-transparent focus:outline-none text-xs w-36 lg:w-44 placeholder:text-neutral-400 font-mono"
+                    >
+                </div>
+
+                <!-- Currency Tag -->
+                <span class="hidden sm:inline-block text-[11px] text-neutral-500 border border-neutral-300 px-2 py-0.5 rounded-sm">VNĐ (₫)</span>
+
+                <!-- Wishlist Counter -->
+                <button onclick="showToast('Danh sách yêu thích đang lưu ' + state.wishlist.length + ' sản phẩm.')" class="relative p-1.5 hover:opacity-70 smooth-ease" title="Danh sách yêu thích">
+                    <i class="fa-regular fa-bookmark text-sm"></i>
+                    <span id="wishlistCount" class="absolute -top-1 -right-1.5 bg-neutral-800 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- Bag Trigger -->
+                <button onclick="toggleCartDrawer(true)" class="flex items-center gap-2 bg-zen-black text-white px-3.5 py-2 rounded-sm hover:bg-neutral-800 smooth-ease">
+                    <span>GIỎ HÀNG</span>
+                    <span id="cartCountBadge" class="bg-white text-zen-black font-bold px-1.5 py-0.2 rounded-sm text-[10px]">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Collapse -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-zen-offwhite border-b border-zen-black/20 px-6 py-5 space-y-4 font-mono text-xs uppercase tracking-widest">
+            <div class="flex items-center border-b border-zen-black pb-2">
+                <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                <input type="text" oninput="handleSearch(this.value)" placeholder="TÌM KIẾM SẢN PHẨM..." class="bg-transparent w-full focus:outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <a href="#catalog" onclick="filterByCategory('ALL'); toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Tất Cả Sản Phẩm</a>
+                <a href="#catalog" onclick="filterByCategory('TOPS'); toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Áo Thun Dày</a>
+                <a href="#catalog" onclick="filterByCategory('OUTERWEAR'); toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Áo Khoác & Hoodie</a>
+                <a href="#fit-lab" onclick="toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Phòng Đo Size</a>
+                <a href="#custom-studio" onclick="toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Xưởng Thiết Kế 1-1</a>
+                <a href="#lookbook" onclick="toggleMobileMenu()" class="py-1.5 border-b border-neutral-200">Tạp Chí Lookbook 01</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION WITH INTERACTIVE CANVAS ================= -->
+    <section class="relative min-h-[82vh] flex items-center justify-between border-b border-zen-black/15 overflow-hidden bg-zen-charcoal text-white">
+        <!-- HTML5 Interactive Generative Fabric Mesh Canvas -->
+        <canvas id="heroCanvas" class="absolute inset-0 w-full h-full pointer-events-auto opacity-80"></canvas>
+
+        <!-- Editorial Overlay Grid Lines -->
+        <div class="absolute inset-0 grid grid-cols-4 pointer-events-none border-x border-white/5 max-w-[1440px] mx-auto">
+            <div class="border-r border-white/5"></div>
+            <div class="border-r border-white/5"></div>
+            <div class="border-r border-white/5"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-[1440px] mx-auto w-full px-4 sm:px-8 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div class="lg:col-span-8 space-y-6">
+                <div class="inline-flex items-center gap-3 border border-white/25 bg-black/40 backdrop-blur-sm px-3.5 py-1.5 rounded-sm">
+                    <span class="w-2 h-2 rounded-full bg-zen-accent animate-pulse"></span>
+                    <span class="font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-300">BỘ SƯU TẬP 01 // LƯU TRỮ THU - ĐÔNG</span>
+                </div>
+
+                <h1 class="font-display text-5xl sm:text-7xl xl:text-8xl font-bold tracking-[-0.04em] leading-[0.94] uppercase">
+                    CẤU TRÚC <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-neutral-500">ĐƯƠNG ĐẠI.</span>
+                </h1>
+
+                <p class="max-w-xl text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
+                    Lấy cảm hứng từ chủ nghĩa kiến trúc thô mộc Brutalism và kỹ thuật cắt may rập 3D đương đại. Định lượng vải dày 340GSM – 480GSM đi cùng hệ thống tính toán thông số <span class="font-mono text-white underline">Đo Phom Thuật Toán</span> chuẩn xác cho vóc dáng người Việt.
+                </p>
+
+                <div class="pt-4 flex flex-wrap items-center gap-4">
+                    <a href="#catalog" class="bg-white text-zen-black font-mono text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4 rounded-sm hover:bg-zen-accent hover:text-zen-black smooth-ease flex items-center gap-3">
+                        <span>KHÁM PHÁ BỘ SƯU TẬP</span>
+                        <i class="fa-solid fa-arrow-down-long"></i>
+                    </a>
+                    <a href="#custom-studio" class="border border-white/40 bg-black/30 backdrop-blur-sm text-white font-mono text-xs uppercase tracking-[0.2em] px-7 py-4 rounded-sm hover:border-white smooth-ease">
+                        XƯỞNG THIẾT KẾ ĐỘC BẢN 1-1
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Metadata Telemetry Card -->
+            <div class="lg:col-span-4 bg-black/60 backdrop-blur-md border border-white/15 p-5 rounded-sm font-mono text-xs space-y-3">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2 text-neutral-400">
+                    <span>TỌA ĐỘ LƯỚI SỢI VẢI</span>
+                    <span id="canvasCoords" class="text-zen-accent">X:042 Y:108</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-[11px]">
+                    <div>
+                        <span class="text-neutral-500 block">ĐỊNH LƯỢNG VẢI</span>
+                        <span class="text-white">340 - 480 GSM</span>
+                    </div>
+                    <div>
+                        <span class="text-neutral-500 block">TỶ LỆ CẮT RẬP</span>
+                        <span class="text-white">PHOM HỘP / VAI TRỄ</span>
+                    </div>
+                    <div>
+                        <span class="text-neutral-500 block">CHẾ TÁC TẠI</span>
+                        <span class="text-white">XƯỞNG SÀI GÒN</span>
+                    </div>
+                    <div>
+                        <span class="text-neutral-500 block">HỆ THỐNG ĐO</span>
+                        <span class="text-white">THUẬT TOÁN RẬP 3D</span>
+                    </div>
+                </div>
+                <p class="text-[10px] text-neutral-400 pt-1">
+                    *Di chuyển chuột hoặc lướt chạm trên màn hình để tương tác với chuyển động sóng lưới sợi vải.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PRODUCT CATALOG SECTION ================= -->
+    <section id="catalog" class="max-w-[1440px] mx-auto px-4 sm:px-8 py-16 md:py-24">
+        <!-- Section Header & Filter Bar -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-zen-black/15 gap-6">
+            <div>
+                <div class="font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-500 mb-2">01 // DANH MỤC LƯU TRỮ</div>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight uppercase">TRANG PHỤC MỞ BÁN</h2>
+            </div>
+
+            <!-- Category Filter Pills & Sort -->
+            <div class="flex flex-wrap items-center justify-between md:justify-end gap-3">
+                <div id="categoryFilters" class="flex flex-wrap gap-1.5 font-mono text-xs">
+                    <button onclick="filterByCategory('ALL')" data-cat="ALL" class="cat-btn bg-zen-black text-white px-4 py-2 rounded-sm uppercase tracking-wider smooth-ease">Tất cả (8)</button>
+                    <button onclick="filterByCategory('TOPS')" data-cat="TOPS" class="cat-btn bg-white border border-neutral-300 text-zen-black px-4 py-2 rounded-sm uppercase tracking-wider hover:border-zen-black smooth-ease">Áo Thun & Áo Len</button>
+                    <button onclick="filterByCategory('OUTERWEAR')" data-cat="OUTERWEAR" class="cat-btn bg-white border border-neutral-300 text-zen-black px-4 py-2 rounded-sm uppercase tracking-wider hover:border-zen-black smooth-ease">Áo Khoác & Hoodie</button>
+                    <button onclick="filterByCategory('BOTTOMS')" data-cat="BOTTOMS" class="cat-btn bg-white border border-neutral-300 text-zen-black px-4 py-2 rounded-sm uppercase tracking-wider hover:border-zen-black smooth-ease">Quần Dài</button>
+                    <button onclick="filterByCategory('ACCESSORIES')" data-cat="ACCESSORIES" class="cat-btn bg-white border border-neutral-300 text-zen-black px-4 py-2 rounded-sm uppercase tracking-wider hover:border-zen-black smooth-ease">Phụ Kiện</button>
+                </div>
+
+                <!-- Price Sort Select -->
+                <select id="sortSelect" onchange="handleSort(this.value)" class="bg-white border border-neutral-300 font-mono text-xs uppercase px-3 py-2 rounded-sm focus:outline-none focus:border-zen-black smooth-ease">
+                    <option value="featured">SẮP XẾP: NỔI BẬT</option>
+                    <option value="price-asc">GIÁ: THẤP ĐẾN CAO</option>
+                    <option value="price-desc">GIÁ: CAO ĐẾN THẤP</option>
+                    <option value="gsm-desc">ĐỘ DÀY VẢI (GSM) CAO NHẤT</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            <!-- Dynamically populated by JS -->
+        </div>
+    </section>
+
+    <!-- ================= ALGORITHMIC FIT LAB (MATH.JS + MATHJAX) ================= -->
+    <section id="fit-lab" class="border-y border-zen-black/15 bg-white py-16 md:py-24">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Interactive Algorithmic Inputs -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div>
+                        <div class="inline-flex items-center gap-2 bg-zen-black text-white font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-sm mb-3">
+                            <span>CÔNG NGHỆ ĐO RẬP THÔNG MINH</span>
+                        </div>
+                        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight uppercase">PHÒNG ĐO PHOM DÁNG ZENKENITH™</h2>
+                        <p class="text-sm text-neutral-600 mt-2 max-w-2xl leading-relaxed">
+                            Hệ thống tính toán tỷ lệ phom dáng độc quyền của Zenkenith. Kéo thanh trượt điều chỉnh số đo cơ thể và độ rộng mong muốn để thuật toán tự động phân tích Size áo chuẩn xác nhất cùng độ đứng phom vải theo thời gian thực.
+                        </p>
+                    </div>
+
+                    <!-- Sliders Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-zen-offwhite p-6 sm:p-8 border border-neutral-200 rounded-sm shadow-xs">
+                        <!-- Height H -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between font-mono text-xs">
+                                <label for="fitHeight" class="uppercase text-neutral-600">Chiều Cao ($H$)</label>
+                                <span id="valHeight" class="font-bold text-zen-black">173 cm</span>
+                            </div>
+                            <input type="range" id="fitHeight" min="150" max="195" value="173" oninput="calculateAlgorithmicFit()" class="w-full">
+                            <div class="w-full bg-neutral-300 h-1 rounded-full overflow-hidden">
+                                <div id="barHeight" class="bg-zen-black h-full smooth-ease" style="width: 51%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400">
+                                <span>150 cm</span>
+                                <span>195 cm</span>
+                            </div>
+                        </div>
+
+                        <!-- Weight W -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between font-mono text-xs">
+                                <label for="fitWeight" class="uppercase text-neutral-600">Cân Nặng ($W$)</label>
+                                <span id="valWeight" class="font-bold text-zen-black">66 kg</span>
+                            </div>
+                            <input type="range" id="fitWeight" min="42" max="110" value="66" oninput="calculateAlgorithmicFit()" class="w-full">
+                            <div class="w-full bg-neutral-300 h-1 rounded-full overflow-hidden">
+                                <div id="barWeight" class="bg-zen-black h-full smooth-ease" style="width: 35%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400">
+                                <span>42 kg</span>
+                                <span>110 kg</span>
+                            </div>
+                        </div>
+
+                        <!-- Shoulder Width S -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between font-mono text-xs">
+                                <label for="fitShoulder" class="uppercase text-neutral-600">Rộng Vai ($S$)</label>
+                                <span id="valShoulder" class="font-bold text-zen-black">46 cm</span>
+                            </div>
+                            <input type="range" id="fitShoulder" min="38" max="58" value="46" oninput="calculateAlgorithmicFit()" class="w-full">
+                            <div class="w-full bg-neutral-300 h-1 rounded-full overflow-hidden">
+                                <div id="barShoulder" class="bg-zen-black h-full smooth-ease" style="width: 40%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400">
+                                <span>38 cm</span>
+                                <span>58 cm</span>
+                            </div>
+                        </div>
+
+                        <!-- Fit Preference Alpha -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between font-mono text-xs">
+                                <label for="fitAlpha" class="uppercase text-neutral-600">Độ Rộng Phom ($\alpha$)</label>
+                                <span id="valAlpha" class="font-bold text-zen-black">1.08 (Phom Hộp)</span>
+                            </div>
+                            <input type="range" id="fitAlpha" min="0.90" max="1.25" step="0.01" value="1.08" oninput="calculateAlgorithmicFit()" class="w-full">
+                            <div class="w-full bg-neutral-300 h-1 rounded-full overflow-hidden">
+                                <div id="barAlpha" class="bg-zen-black h-full smooth-ease" style="width: 51%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-neutral-400">
+                                <span>0.90 (Vừa Vặn)</span>
+                                <span>1.08 (Phom Hộp)</span>
+                                <span>1.25 (Rộng Thụng)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subtle Fit Assurance Banner (Math Formula Accordion Hidden as Requested) -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 px-5 py-4 bg-zen-offwhite border border-neutral-200 rounded-sm font-mono text-xs text-neutral-600">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                            <span>Độ chính xác phom rập: <strong class="text-zen-black">99.4%</strong> dựa trên 12.000+ mẫu hình thể chuẩn.</span>
+                        </div>
+                        <span class="text-[11px] text-neutral-400">TỰ ĐỘNG NỘI SUY THEO THỜI GIAN THỰC</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Real-Time Calculated Output Card -->
+                <div class="lg:col-span-5 bg-zen-black text-white p-8 rounded-sm space-y-6 border border-neutral-800 shadow-2xl">
+                    <div class="flex items-center justify-between border-b border-white/15 pb-4">
+                        <div>
+                            <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 block">ĐỀ XUẤT TỪ HỆ THỐNG</span>
+                            <h3 class="font-display text-xl uppercase font-bold">KẾT QUẢ PHÂN TÍCH RẬP</h3>
+                        </div>
+                        <span class="font-mono text-xs px-2.5 py-1 bg-zen-accent text-zen-black font-bold rounded-sm">TRỰC TIẾP</span>
+                    </div>
+
+                    <!-- Recommended Size Big Badge -->
+                    <div class="grid grid-cols-2 gap-4 items-center bg-white/5 p-5 rounded-sm border border-white/10">
+                        <div>
+                            <span class="font-mono text-[11px] text-neutral-400 uppercase block">KÍCH CỠ KHUYÊN DÙNG</span>
+                            <div id="recommendedSizeDisplay" class="font-display text-5xl sm:text-6xl font-bold text-zen-accent tracking-tighter mt-1 smooth-ease">CỠ L</div>
+                            <span id="recommendedFitDesc" class="font-mono text-[11px] text-neutral-300 mt-1 block">Phom Hộp Vai Trễ</span>
+                        </div>
+                        <div class="space-y-3 font-mono text-xs border-l border-white/15 pl-4">
+                            <div>
+                                <span class="text-neutral-400 block text-[10px]">CHỈ SỐ HÌNH THỂ ($F$)</span>
+                                <span id="fitScoreOutput" class="text-lg font-bold text-white">0.942</span>
+                            </div>
+                            <div>
+                                <span class="text-neutral-400 block text-[10px]">ĐỘ ĐỨNG VẢI ($\mathcal{D}$)</span>
+                                <span id="drapeScoreOutput" class="text-lg font-bold text-white">2.381</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Garment Dimension Specs for Selected Size -->
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="text-neutral-400 uppercase tracking-wider text-[11px]">THÔNG SỐ ÁO TƯƠNG ỨNG (CM):</div>
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div class="bg-white/5 p-3 rounded-sm border border-white/5">
+                                <span class="text-neutral-400 text-[10px] block">DÀI ÁO</span>
+                                <span id="specLength" class="font-bold text-sm mt-0.5 block">74 cm</span>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-sm border border-white/5">
+                                <span class="text-neutral-400 text-[10px] block">NGANG NGỰC</span>
+                                <span id="specChest" class="font-bold text-sm mt-0.5 block">64 cm</span>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-sm border border-white/5">
+                                <span class="text-neutral-400 text-[10px] block">RỘNG VAI</span>
+                                <span id="specShoulder" class="font-bold text-sm mt-0.5 block">58 cm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="applyRecommendedSizeToFilter()" class="w-full bg-white text-zen-black font-mono text-xs uppercase tracking-[0.2em] font-bold py-4 rounded-sm hover:bg-zen-accent smooth-ease">
+                        ĐỒNG BỘ CỠ NÀY CHO TOÀN BỘ SẢN PHẨM
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 1-OF-1 INTERACTIVE CANVAS CUSTOMIZER STUDIO ================= -->
+    <section id="custom-studio" class="max-w-[1440px] mx-auto px-4 sm:px-8 py-16 md:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Canvas Preview Container -->
+            <div class="lg:col-span-7 bg-zen-charcoal p-6 sm:p-10 rounded-sm border border-zen-black relative flex flex-col items-center shadow-xl">
+                <div class="w-full flex items-center justify-between font-mono text-[11px] text-neutral-400 mb-4">
+                    <span>XƯỞNG CHẾ TÁC ZENKENITH® // KHUNG VẼ ĐỒ HỌA ĐỘC BẢN</span>
+                    <span id="customSerialId" class="text-zen-accent">MÃ ĐỘC BẢN #ZK-8841</span>
+                </div>
+
+                <!-- Interactive Apparel Canvas -->
+                <div class="w-full max-w-[460px] aspect-square bg-neutral-900 border border-white/10 rounded-sm overflow-hidden flex items-center justify-center">
+                    <canvas id="customizerCanvas" width="500" height="500" class="w-full h-full"></canvas>
+                </div>
+
+                <div class="w-full flex items-center justify-between font-mono text-[10px] text-neutral-400 mt-4">
+                    <span>CHẤT LIỆU: COTTON CHẢI KỸ 360GSM</span>
+                    <span>CÔNG NGHỆ IN: IN LỤA NỔI CAO THÀNH & KỸ THUẬT SỐ</span>
+                </div>
+            </div>
+
+            <!-- Customizer Controls -->
+            <div class="lg:col-span-5 space-y-6">
+                <div>
+                    <div class="font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-500 mb-2">02 // XƯỞNG CHẾ TÁC CÁ NHÂN</div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight uppercase">XƯỞNG THIẾT KẾ ÁO ĐỘC BẢN 1-1</h2>
+                    <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+                        Tự tay kiến tạo họa tiết hình học độc bản trên phôi áo thun dày phom hộp của Zenkenith. Mỗi bản phối sẽ được cấp một mã định danh lưu trữ riêng biệt và chuyển thẳng xuống xưởng in.
+                    </p>
+                </div>
+
+                <!-- Controls Form -->
+                <div class="space-y-5 bg-white p-6 border border-neutral-200 rounded-sm font-mono text-xs shadow-xs">
+                    <!-- Garment Base Color -->
+                    <div>
+                        <label class="block uppercase text-neutral-500 mb-2">1. Màu Nhuộm Phôi Áo</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="setCustomGarmentColor('#121212', 'ĐEN ĐÁ NÚI LỬA')" class="py-2.5 border border-zen-black bg-[#121212] text-white text-[10px] rounded-sm smooth-ease hover:opacity-90">ĐEN THẠCH</button>
+                            <button onclick="setCustomGarmentColor('#e8e6df', 'KEM MỘC NGUYÊN BẢN')" class="py-2.5 border border-neutral-300 bg-[#e8e6df] text-zen-black text-[10px] rounded-sm smooth-ease hover:border-zen-black">KEM MỘC</button>
+                            <button onclick="setCustomGarmentColor('#2b302c', 'XANH RÊU BẠC MÀU')" class="py-2.5 border border-neutral-300 bg-[#2b302c] text-white text-[10px] rounded-sm smooth-ease hover:opacity-90">XANH RÊU</button>
+                            <button onclick="setCustomGarmentColor('#362c28', 'NÂU ĐẤT NUNG')" class="py-2.5 border border-neutral-300 bg-[#362c28] text-white text-[10px] rounded-sm smooth-ease hover:opacity-90">NÂU ĐẤT</button>
+                        </div>
+                    </div>
+
+                    <!-- Algorithm Mode -->
+                    <div>
+                        <label class="block uppercase text-neutral-500 mb-2">2. Thuật Toán Đồ Họa</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setCustomPatternMode('monolith')" id="mode-monolith" class="pattern-mode-btn py-2 border border-zen-black bg-zen-black text-white rounded-sm uppercase text-[10px] smooth-ease">LƯỚI KIẾN TRÚC</button>
+                            <button onclick="setCustomPatternMode('topography')" id="mode-topography" class="pattern-mode-btn py-2 border border-neutral-300 bg-white text-zen-black rounded-sm uppercase text-[10px] smooth-ease">SÓNG ĐỊA HÌNH</button>
+                            <button onclick="setCustomPatternMode('orbital')" id="mode-orbital" class="pattern-mode-btn py-2 border border-neutral-300 bg-white text-zen-black rounded-sm uppercase text-[10px] smooth-ease">QUỸ ĐẠO XOÁY</button>
+                        </div>
+                    </div>
+
+                    <!-- Complexity Slider -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="uppercase text-neutral-500">3. Mật Độ Đường Nét</span>
+                            <span id="customDensityVal" class="font-bold">24 Điểm Nút</span>
+                        </div>
+                        <input type="range" id="customDensity" min="8" max="48" value="24" oninput="updateCustomizerTarget()" class="w-full">
+                    </div>
+
+                    <!-- Custom Back/Chest Inscription -->
+                    <div>
+                        <label class="block uppercase text-neutral-500 mb-1.5">4. Dòng Chữ In Ngực Áo</label>
+                        <input 
+                            type="text" 
+                            id="customTextInput" 
+                            maxlength="20" 
+                            value="KHỐI ĐƠN THẠCH" 
+                            oninput="updateCustomizerTarget()"
+                            class="w-full border border-neutral-300 px-3 py-2 rounded-sm uppercase font-mono text-xs focus:outline-none focus:border-zen-black smooth-ease"
+                        >
+                    </div>
+
+                    <!-- Size Selection & Randomize -->
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <div>
+                            <label class="block uppercase text-neutral-500 mb-1">CHỌN KÍCH CỠ</label>
+                            <select id="customSizeSelect" class="w-full border border-neutral-300 px-3 py-2.5 rounded-sm font-mono text-xs">
+                                <option value="S">CỠ S (PHOM HỘP)</option>
+                                <option value="M">CỠ M (PHOM HỘP)</option>
+                                <option value="L" selected>CỠ L (PHOM HỘP)</option>
+                                <option value="XL">CỠ XL (PHOM HỘP)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="randomizeCustomCanvas()" class="w-full border border-zen-black py-2.5 rounded-sm uppercase hover:bg-neutral-100 smooth-ease">
+                                <i class="fa-solid fa-dice mr-1.5"></i> PHỐI NGẪU NHIÊN
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price & Add Custom Piece to Bag -->
+                    <div class="pt-4 border-t border-neutral-200 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-neutral-400 block">GIÁ CHẾ TÁC ĐỘC BẢN</span>
+                            <span class="font-display text-2xl font-bold">980.000₫</span>
+                        </div>
+                        <button onclick="addCustomPieceToCart()" class="bg-zen-black text-white px-6 py-3.5 rounded-sm uppercase tracking-wider font-bold hover:bg-neutral-800 smooth-ease">
+                            ĐẶT ÁO ĐỘC BẢN NÀY
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= EDITORIAL LOOKBOOK 01 SECTION ================= -->
+    <section id="lookbook" class="bg-zen-black text-white py-16 md:py-24 border-t border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="font-mono text-[11px] uppercase tracking-[0.25em] text-zen-accent block mb-2">03 // TẠP CHÍ THỊ GIÁC</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight uppercase">LOOKBOOK 01: TĨNH LẶNG BÊ TÔNG</h2>
+                </div>
+                <p class="font-mono text-xs text-neutral-400 max-w-md leading-relaxed">
+                    Thực hiện tại không gian kiến trúc bê tông thô mộc. Tôn vinh cấu trúc áo khoác kỹ thuật đa túi, áo nỉ khóa kéo hai chiều và quần túi hộp ống suông rộng.
+                </p>
+            </div>
+
+            <!-- Lookbook Asymmetric Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Look 01 -->
+                <div class="md:col-span-5 group relative overflow-hidden border border-white/10 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80" 
+                         onerror="this.src='https://placehold.co/800x1000/141414/ffffff?text=ZENKENITH+PHOI+DO+01'"
+                         alt="Zenkenith Phối Đồ 01" 
+                         class="w-full h-[520px] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 smooth-ease">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+                        <span class="font-mono text-[10px] text-zen-accent tracking-widest">BẢN PHỐI 01 // LỚP VỎ KỸ THUẬT</span>
+                        <h3 class="font-display text-xl font-bold uppercase mt-1">ÁO KHOÁC GIÓ ĐƠN THẠCH + QUẦN DÙ ỐNG RỘNG</h3>
+                    </div>
+                </div>
+
+                <!-- Look 02 -->
+                <div class="md:col-span-7 group relative overflow-hidden border border-white/10 rounded-sm">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" 
+                         onerror="this.src='https://placehold.co/1200x1000/1c1c1c/ffffff?text=ZENKENITH+PHOI+DO+02'"
+                         alt="Zenkenith Phối Đồ 02" 
+                         class="w-full h-[520px] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 smooth-ease">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+                        <span class="font-mono text-[10px] text-zen-accent tracking-widest">BẢN PHỐI 02 // NỈ CHÂN CUA SIÊU DÀY</span>
+                        <h3 class="font-display text-xl font-bold uppercase mt-1">ÁO HOODIE KHÓA KÉO ĐÔI 480GSM MÀU XÁM TRO</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-zen-offwhite border-t border-zen-black/15 py-16 font-mono text-xs">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div class="space-y-3">
+                <div class="font-display font-bold text-2xl tracking-[-0.06em] uppercase">ZENKENITH®</div>
+                <p class="text-neutral-500 text-[11px] leading-relaxed">
+                    THỜI TRANG ĐƯỜNG PHỐ ĐƯƠNG ĐẠI & KỸ THUẬT CẮT RẬP THUẬT TOÁN. THIẾT KẾ VÀ CHẾ TÁC TẠI VIỆT NAM.
+                </p>
+                <div class="text-[11px] text-neutral-700 pt-2">
+                    CỬA HÀNG TRƯNG BÀY: ĐỒNG KHỞI, QUẬN 1, TP. HỒ CHÍ MINH
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-3">ĐIỀU HƯỚNG LƯU TRỮ</h4>
+                <ul class="space-y-2 text-neutral-600">
+                    <li><a href="#catalog" class="hover:text-zen-black smooth-ease">Toàn Bộ Bộ Sưu Tập 01</a></li>
+                    <li><a href="#fit-lab" class="hover:text-zen-black smooth-ease">Phòng Đo Phom Thuật Toán</a></li>
+                    <li><a href="#custom-studio" class="hover:text-zen-black smooth-ease">Xưởng Thiết Kế Độc Bản 1-1</a></li>
+                    <li><a href="#lookbook" class="hover:text-zen-black smooth-ease">Tạp Chí Hình Ảnh Lookbook</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-3">DỊCH VỤ KHÁCH HÀNG</h4>
+                <ul class="space-y-2 text-neutral-600">
+                    <li>Chính sách đổi trả miễn phí trong 14 ngày</li>
+                    <li>Bảng tiêu chuẩn định lượng vải GSM</li>
+                    <li>Hướng dẫn bảo quản vải Cotton Wash</li>
+                    <li>Liên hệ: cskh@zenkenith.vn</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold uppercase tracking-wider mb-3">ĐĂNG KÝ BẢN TIN</h4>
+                <p class="text-neutral-500 text-[11px] mb-3">Nhận thông báo sớm nhất về các đợt mở bán giới hạn và mã ưu đãi thành viên.</p>
+                <form onsubmit="event.preventDefault(); showToast('Đã đăng ký nhận thông báo mở bán mới từ ZENKENITH®.'); this.reset();" class="flex border border-zen-black rounded-sm overflow-hidden">
+                    <input type="email" required placeholder="NHẬP EMAIL CỦA BẠN..." class="bg-white px-3 py-2.5 w-full focus:outline-none text-xs">
+                    <button type="submit" class="bg-zen-black text-white px-4 font-bold uppercase hover:bg-neutral-800 smooth-ease">GỬI</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 mt-12 pt-6 border-t border-neutral-300 flex flex-col sm:flex-row justify-between text-[11px] text-neutral-500">
+            <span>© 2026 ZENKENITH® VIỆT NAM. BẢO LƯU MỌI QUYỀN.</span>
+            <span>VẬN HÀNH BỞI HTML5 CANVAS, TAILWIND CSS, MATH.JS & MATHJAX</span>
+        </div>
+    </footer>
+
+    <!-- ================= PRODUCT DETAIL MODAL ================= -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto modal-backdrop-anim">
+        <div class="bg-zen-offwhite border border-zen-black max-w-4xl w-full rounded-sm overflow-hidden shadow-2xl my-8 modal-content-anim">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-neutral-300 bg-white font-mono text-xs">
+                <span id="modalProductCode" class="uppercase tracking-widest text-neutral-500">ZK-01 // HỒ SƠ LƯU TRỮ</span>
+                <button onclick="closeProductModal()" class="p-1 hover:bg-neutral-200 rounded-sm smooth-ease" aria-label="Đóng">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 sm:p-8">
+                <!-- Product Image -->
+                <div class="bg-neutral-200 aspect-[4/5] rounded-sm overflow-hidden relative">
+                    <img id="modalProductImg" src="" alt="Sản phẩm" class="w-full h-full object-cover">
+                    <span id="modalProductBadge" class="absolute top-3 left-3 bg-zen-black text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded-sm"></span>
+                </div>
+
+                <!-- Product Details -->
+                <div class="flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div id="modalProductCategory" class="font-mono text-xs uppercase text-neutral-500"></div>
+                        <h3 id="modalProductName" class="font-display text-2xl sm:text-3xl font-bold uppercase"></h3>
+                        <div id="modalProductPrice" class="font-mono text-xl font-bold"></div>
+                        <p id="modalProductDesc" class="text-sm text-neutral-600 leading-relaxed pt-2"></p>
+                    </div>
+
+                    <!-- Technical Specs Table -->
+                    <div class="bg-white p-4 border border-neutral-200 rounded-sm font-mono text-xs space-y-1.5">
+                        <div class="flex justify-between">
+                            <span class="text-neutral-500">ĐỊNH LƯỢNG VẢI:</span>
+                            <span id="modalProductGsm" class="font-bold"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-neutral-500">CHẤT LIỆU:</span>
+                            <span>100% COTTON CHẢI KỸ DÀY 2 CHIỀU</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-neutral-500">ĐỀ XUẤT TỪ PHÒNG ĐO SIZE:</span>
+                            <span id="modalSuggestedSize" class="font-bold underline">CỠ L</span>
+                        </div>
+                    </div>
+
+                    <!-- Size Picker -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between font-mono text-xs">
+                            <span class="uppercase">CHỌN KÍCH CỠ:</span>
+                            <a href="#fit-lab" onclick="closeProductModal()" class="underline text-neutral-500 hover:text-zen-black smooth-ease">Đo lại kích cỡ chuẩn</a>
+                        </div>
+                        <div id="modalSizeButtons" class="grid grid-cols-4 gap-2 font-mono text-xs">
+                            <!-- Size buttons rendered by JS -->
+                        </div>
+                    </div>
+
+                    <button id="modalAddToCartBtn" class="w-full bg-zen-black text-white font-mono text-xs uppercase tracking-[0.2em] font-bold py-4 rounded-sm hover:bg-neutral-800 smooth-ease">
+                        THÊM VÀO GIỎ HÀNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE-OVER SHOPPING BAG DRAWER ================= -->
+    <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden modal-backdrop-anim"></div>
+    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-zen-offwhite z-50 transform translate-x-full drawer-anim border-l border-zen-black flex flex-col justify-between">
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-neutral-300 flex items-center justify-between bg-white">
+            <div class="font-mono text-xs uppercase tracking-widest font-bold flex items-center gap-2">
+                <span>GIỎ HÀNG CỦA BẠN</span>
+                <span id="drawerCartCount" class="bg-zen-black text-white px-2 py-0.5 rounded-sm text-[10px]">0</span>
+            </div>
+            <button onclick="toggleCartDrawer(false)" class="p-1.5 hover:bg-neutral-200 rounded-sm smooth-ease" aria-label="Đóng giỏ hàng">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items Scrollable List -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Cart Footer with math.js Bundle Pricing Breakdown -->
+        <div class="p-6 border-t border-neutral-300 bg-white space-y-4 font-mono text-xs">
+            <!-- Promo Code Input -->
+            <div class="flex gap-2">
+                <input 
+                    type="text" 
+                    id="promoCodeInput" 
+                    placeholder="MÃ GIẢM GIÁ (THỬ: ZEN10)" 
+                    class="border border-neutral-300 px-3 py-2 w-full rounded-sm uppercase text-xs focus:outline-none focus:border-zen-black smooth-ease"
+                >
+                <button onclick="applyPromoCode()" class="bg-neutral-900 text-white px-4 py-2 rounded-sm uppercase hover:bg-neutral-700 smooth-ease">ÁP DỤNG</button>
+            </div>
+
+            <!-- math.js Calculated Price Breakdown -->
+            <div class="space-y-1.5 pt-2 border-t border-neutral-200">
+                <div class="flex justify-between text-neutral-500">
+                    <span>TẠM TÍNH:</span>
+                    <span id="cartSubtotal">0₫</span>
+                </div>
+                <div class="flex justify-between text-emerald-700">
+                    <span id="bundleDiscountLabel">CHIẾT KHẤU MUA KÈM:</span>
+                    <span id="cartDiscount">-0₫</span>
+                </div>
+                <div class="flex justify-between text-neutral-500">
+                    <span>PHÍ VẬN CHUYỂN:</span>
+                    <span id="cartShipping">0₫</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold pt-2 border-t border-neutral-200">
+                    <span>TỔNG THANH TOÁN:</span>
+                    <span id="cartTotal">0₫</span>
+                </div>
+            </div>
+
+            <button onclick="handleCheckout()" class="w-full bg-zen-black text-white py-4 rounded-sm uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 smooth-ease">
+                TIẾN HÀNH ĐẶT HÀNG
+            </button>
+        </div>
+    </aside>
+
+    <!-- ================= TOAST NOTIFICATION BOX (NO ALERT()) ================= -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- ================= APPLICATION JAVASCRIPT ================= -->
+    <script>
+        /* =========================================================================
+           1. PRODUCT ARCHIVE DATA & GLOBAL APPLICATION STATE
+           ========================================================================= */
+        const CATEGORY_LABELS = {
+            'ALL': 'TẤT CẢ',
+            'TOPS': 'ÁO THUN & ÁO LEN',
+            'OUTERWEAR': 'ÁO KHOÁC & HOODIE',
+            'BOTTOMS': 'QUẦN DÀI',
+            'ACCESSORIES': 'PHỤ KIỆN'
+        };
+
+        const PRODUCTS = [
+            {
+                id: 'zk-01',
+                code: 'ZK-01 // ÁO THUN',
+                name: 'ÁO THUN PHOM HỘP KHỐI ĐƠN THẠCH',
+                category: 'TOPS',
+                price: 780000,
+                gsm: 340,
+                badge: 'MỚI RA MẮT',
+                imgPrimary: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80',
+                desc: 'Áo thun phom hộp rộng (Boxy Oversized) đặc trưng của Zenkenith. Dệt từ 100% sợi Cotton chải kỹ 2 chiều định lượng 340GSM dày dặn, xử lý wash enzyme tạo bề mặt bụi bặm cổ điển.'
+            },
+            {
+                id: 'zk-02',
+                code: 'ZK-02 // ÁO KHOÁC',
+                name: 'ÁO HOODIE KHÓA KÉO ĐÔI THÔ MỘC',
+                category: 'OUTERWEAR',
+                price: 1650000,
+                gsm: 480,
+                badge: 'BẢN GIỚI HẠN',
+                imgPrimary: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=800&q=80',
+                desc: 'Áo khoác Hoodie nỉ chân cua 480GSM siêu dày, mũ trùm 2 lớp đứng phom tuyệt đối. Trang bị khóa kéo kim loại YKK 2 chiều cùng đường cắt rập raglan vai trễ.'
+            },
+            {
+                id: 'zk-03',
+                code: 'ZK-03 // QUẦN DÀI',
+                name: 'QUẦN TÚI HỘP ỐNG RỘNG KIẾN TRÚC',
+                category: 'BOTTOMS',
+                price: 1420000,
+                gsm: 380,
+                badge: 'BÁN CHẠY',
+                imgPrimary: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=80',
+                desc: 'Quần túi hộp ống suông rộng lấy cảm hứng từ trang phục bảo hộ kiến trúc. Thiết kế 8 túi hộp xếp ly 3D cùng dây rút điều chỉnh độ mở ống quần linh hoạt.'
+            },
+            {
+                id: 'zk-04',
+                code: 'ZK-04 // ÁO LEN',
+                name: 'ÁO LEN ĐAN SỜN VIỀN THỦ CÔNG',
+                category: 'TOPS',
+                price: 1290000,
+                gsm: 420,
+                badge: 'LƯU TRỮ 01',
+                imgPrimary: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=800&q=80',
+                desc: 'Áo len đan thưa kỹ thuật Jacquard với các chi tiết sờn viền thủ công ở gấu áo và cổ tay. Phom rộng thoải mái tạo hiệu ứng phối nhiều lớp có chiều sâu.'
+            },
+            {
+                id: 'zk-05',
+                code: 'ZK-05 // ÁO KHOÁC',
+                name: 'ÁO KHOÁC GIÓ KỸ THUẬT VORTEX',
+                category: 'OUTERWEAR',
+                price: 2150000,
+                gsm: 310,
+                badge: 'BẢN GIỚI HẠN',
+                imgPrimary: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80',
+                desc: 'Áo khoác gió kỹ thuật 3 lớp chống trượt nước, hệ thống khóa kéo ép nhiệt chống thấm và ngăn ẩn trước ngực tiện dụng cho di chuyển đô thị.'
+            },
+            {
+                id: 'zk-06',
+                code: 'ZK-06 // QUẦN DÀI',
+                name: 'QUẦN DENIM THÔ XẾP LY ỐNG SUÔNG',
+                category: 'BOTTOMS',
+                price: 1580000,
+                gsm: 450,
+                badge: 'MỚI RA MẮT',
+                imgPrimary: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80',
+                desc: 'Quần Jean Denim thô 14.5oz nhuộm chàm đen tự nhiên, xếp ly đôi ở mặt trước tạo độ phồng thanh lịch nhưng vẫn đậm chất đường phố.'
+            },
+            {
+                id: 'zk-07',
+                code: 'ZK-07 // ÁO DÀI TAY',
+                name: 'ÁO DÀI TAY WASH AXIT IN ĐỒ HỌA',
+                category: 'TOPS',
+                price: 890000,
+                gsm: 350,
+                badge: 'LƯU TRỮ 01',
+                imgPrimary: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=800&q=80',
+                desc: 'Áo thun dài tay xử lý Wash Axit thủ công từng chiếc, hình in lụa nổi cao thành ở mặt lưng bền bỉ không bong tróc.'
+            },
+            {
+                id: 'zk-08',
+                code: 'ZK-08 // PHỤ KIỆN',
+                name: 'TÚI ĐEO CHÉO ĐƠN THẠCH CORDURA',
+                category: 'ACCESSORIES',
+                price: 950000,
+                gsm: 500,
+                badge: 'PHỤ KIỆN',
+                imgPrimary: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80',
+                imgSecondary: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80',
+                desc: 'Túi đeo chéo vải Cordura Ballistic Nylon chống thấm và chống rách, khóa nam châm thao tác nhanh cùng ngăn chống sốc vừa máy tính 14 inch.'
+            }
+        ];
+
+        const state = {
+            activeCategory: 'ALL',
+            searchQuery: '',
+            sortBy: 'featured',
+            recommendedSize: 'L',
+            selectedSizes: {}, // productId -> size
+            wishlist: [],
+            cart: [
+                {
+                    id: 'zk-01',
+                    name: 'ÁO THUN PHOM HỘP KHỐI ĐƠN THẠCH',
+                    price: 780000,
+                    size: 'L',
+                    qty: 1,
+                    img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=300&q=80'
+                }
+            ],
+            promoCode: null,
+            promoRate: 0,
+            modalProduct: null,
+            modalSelectedSize: 'L',
+            // Smooth Animated Fit Values
+            animFitScore: 0.942,
+            targetFitScore: 0.942,
+            animDrapeScore: 2.381,
+            targetDrapeScore: 2.381,
+            // Customizer State with Smooth Lerp
+            customGarmentColor: '#121212',
+            customColorName: 'ĐEN ĐÁ NÚI LỬA',
+            customPatternMode: 'monolith',
+            customSeed: 8841,
+            customAnimDensity: 24,
+            customTargetDensity: 24,
+            customPhase: 0
+        };
+
+        /* =========================================================================
+           2. CURRENCY FORMATTER & TOAST HELPER
+           ========================================================================= */
+        function formatVND(amount) {
+            return new Intl.NumberFormat('vi-VN').format(Math.round(amount)) + '₫';
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'bg-zen-black text-white border border-white/20 px-4 py-3 rounded-sm shadow-xl font-mono text-xs flex items-center gap-3 pointer-events-auto smooth-ease translate-y-2 opacity-0';
+            toast.innerHTML = `
+                <span class="w-2 h-2 bg-zen-accent rounded-full"></span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 450);
+            }, 3200);
+        }
+
+        /* =========================================================================
+           3. PRODUCT CATALOG RENDER, FILTERING & SORTING
+           ========================================================================= */
+        function renderCatalog() {
+            const grid = document.getElementById('productGrid');
+            let filtered = PRODUCTS.filter(p => {
+                const matchesCat = state.activeCategory === 'ALL' || p.category === state.activeCategory;
+                const matchesSearch = p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                                      p.code.toLowerCase().includes(state.searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (state.sortBy === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (state.sortBy === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (state.sortBy === 'gsm-desc') {
+                filtered.sort((a, b) => b.gsm - a.gsm);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center font-mono text-sm text-neutral-500 border border-dashed border-neutral-300 rounded-sm">
+                        KHÔNG TÌM THẤY SẢN PHẨM PHÙ HỢP TRONG KHO LƯU TRỮ.
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(product => {
+                const currentSize = state.selectedSizes[product.id] || state.recommendedSize || 'L';
+                const isWishlisted = state.wishlist.includes(product.id);
+                return `
+                    <article class="product-card group flex flex-col justify-between">
+                        <div>
+                            <!-- Image Container -->
+                            <div class="relative aspect-[4/5] bg-neutral-200 overflow-hidden rounded-sm border border-zen-black/10 mb-4 cursor-pointer" onclick="openProductModal('${product.id}')">
+                                <img src="${product.imgPrimary}" 
+                                     onerror="this.src='https://placehold.co/600x750/141414/ffffff?text=ZENKENITH'"
+                                     alt="${product.name}" 
+                                     class="primary-img w-full h-full object-cover">
+                                <img src="${product.imgSecondary}" 
+                                     onerror="this.src='https://placehold.co/600x750/262626/ffffff?text=GOC+NHIN+02'"
+                                     alt="${product.name} góc nhìn 2" 
+                                     class="secondary-img absolute inset-0 w-full h-full object-cover">
+
+                                <!-- Top Badges -->
+                                <div class="absolute top-3 left-3 right-3 flex justify-between items-center pointer-events-none">
+                                    <span class="bg-zen-black text-white font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-sm">${product.badge}</span>
+                                    <span class="bg-white/90 backdrop-blur-xs text-zen-black font-mono text-[10px] font-bold px-2 py-0.5 rounded-sm">${product.gsm} GSM</span>
+                                </div>
+
+                                <!-- Wishlist Button -->
+                                <button onclick="event.stopPropagation(); toggleWishlist('${product.id}')" class="absolute bottom-3 right-3 bg-white/90 hover:bg-zen-black hover:text-white text-zen-black w-8 h-8 rounded-sm flex items-center justify-center smooth-ease" aria-label="Lưu yêu thích">
+                                    <i class="${isWishlisted ? 'fa-solid' : 'fa-regular'} fa-bookmark text-xs"></i>
+                                </button>
+                            </div>
+
+                            <!-- Metadata -->
+                            <div class="flex justify-between items-start font-mono text-[10px] text-neutral-500 mb-1">
+                                <span>${product.code}</span>
+                                <span>PHOM HỘP RỘNG</span>
+                            </div>
+                            <h3 onclick="openProductModal('${product.id}')" class="font-display font-bold text-base uppercase tracking-tight cursor-pointer hover:underline">${product.name}</h3>
+                            <div class="font-mono text-sm font-semibold mt-1">${formatVND(product.price)}</div>
+                        </div>
+
+                        <!-- Quick-Add Size Bar -->
+                        <div class="mt-4 pt-3 border-t border-neutral-200 space-y-2">
+                            <div class="grid grid-cols-4 gap-1 font-mono text-[11px]">
+                                ${['S', 'M', 'L', 'XL'].map(sz => `
+                                    <button onclick="selectCardSize('${product.id}', '${sz}')" 
+                                            class="py-1 border rounded-sm smooth-ease ${currentSize === sz ? 'bg-zen-black text-white border-zen-black font-bold' : 'bg-white text-neutral-700 border-neutral-300 hover:border-zen-black'}">
+                                        ${sz}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <button onclick="addToCart('${product.id}', '${currentSize}')" class="w-full bg-zen-black text-white font-mono text-[11px] uppercase tracking-widest py-2.5 rounded-sm hover:bg-neutral-800 smooth-ease flex items-center justify-center gap-2">
+                                <span>+ THÊM VÀO GIỎ (CỠ ${currentSize})</span>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function selectCardSize(productId, size) {
+            state.selectedSizes[productId] = size;
+            renderCatalog();
+        }
+
+        function filterByCategory(category) {
+            state.activeCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'cat-btn bg-zen-black text-white px-4 py-2 rounded-sm uppercase tracking-wider smooth-ease';
+                } else {
+                    btn.className = 'cat-btn bg-white border border-neutral-300 text-zen-black px-4 py-2 rounded-sm uppercase tracking-wider hover:border-zen-black smooth-ease';
+                }
+            });
+            renderCatalog();
+        }
+
+        function handleSearch(query) {
+            state.searchQuery = query.trim();
+            renderCatalog();
+        }
+
+        function handleSort(sortVal) {
+            state.sortBy = sortVal;
+            renderCatalog();
+        }
+
+        function toggleWishlist(productId) {
+            const idx = state.wishlist.indexOf(productId);
+            if (idx === -1) {
+                state.wishlist.push(productId);
+                showToast('Đã lưu sản phẩm vào danh sách yêu thích.');
+            } else {
+                state.wishlist.splice(idx, 1);
+                showToast('Đã bỏ sản phẩm khỏi danh sách yêu thích.');
+            }
+            document.getElementById('wishlistCount').textContent = state.wishlist.length;
+            renderCatalog();
+        }
+
+        /* =========================================================================
+           4. PRODUCT DETAIL MODAL
+           ========================================================================= */
+        function openProductModal(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            state.modalProduct = product;
+            state.modalSelectedSize = state.selectedSizes[productId] || state.recommendedSize || 'L';
+
+            document.getElementById('modalProductCode').textContent = product.code;
+            document.getElementById('modalProductImg').src = product.imgPrimary;
+            document.getElementById('modalProductBadge').textContent = product.badge;
+            document.getElementById('modalProductCategory').textContent = CATEGORY_LABELS[product.category] || product.category;
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductPrice').textContent = formatVND(product.price);
+            document.getElementById('modalProductDesc').textContent = product.desc;
+            document.getElementById('modalProductGsm').textContent = product.gsm + ' GSM';
+            document.getElementById('modalSuggestedSize').textContent = 'CỠ ' + state.recommendedSize;
+
+            renderModalSizeButtons();
+
+            document.getElementById('modalAddToCartBtn').onclick = () => {
+                addToCart(product.id, state.modalSelectedSize);
+                closeProductModal();
+            };
+
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function renderModalSizeButtons() {
+            const container = document.getElementById('modalSizeButtons');
+            container.innerHTML = ['S', 'M', 'L', 'XL'].map(sz => `
+                <button onclick="state.modalSelectedSize = '${sz}'; renderModalSizeButtons();"
+                        class="py-2.5 border rounded-sm uppercase font-mono smooth-ease ${state.modalSelectedSize === sz ? 'bg-zen-black text-white border-zen-black font-bold' : 'bg-white text-zen-black border-neutral-300'}">
+                    CỠ ${sz}
+                </button>
+            `).join('');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        /* =========================================================================
+           5. ALGORITHMIC SIZE & FIT LAB (SMOOTH INTERPOLATION + MATH.JS)
+           ========================================================================= */
+        let fitAnimFrame = null;
+
+        function animateFitCounters() {
+            const diffF = state.targetFitScore - state.animFitScore;
+            const diffD = state.targetDrapeScore - state.animDrapeScore;
+
+            if (Math.abs(diffF) > 0.0005 || Math.abs(diffD) > 0.0005) {
+                state.animFitScore += diffF * 0.18;
+                state.animDrapeScore += diffD * 0.18;
+                document.getElementById('fitScoreOutput').textContent = state.animFitScore.toFixed(3);
+                document.getElementById('drapeScoreOutput').textContent = state.animDrapeScore.toFixed(3);
+                fitAnimFrame = requestAnimationFrame(animateFitCounters);
+            } else {
+                state.animFitScore = state.targetFitScore;
+                state.animDrapeScore = state.targetDrapeScore;
+                document.getElementById('fitScoreOutput').textContent = state.animFitScore.toFixed(3);
+                document.getElementById('drapeScoreOutput').textContent = state.animDrapeScore.toFixed(3);
+                fitAnimFrame = null;
+            }
+        }
+
+        function calculateAlgorithmicFit() {
+            const H = parseFloat(document.getElementById('fitHeight').value);
+            const W = parseFloat(document.getElementById('fitWeight').value);
+            const S = parseFloat(document.getElementById('fitShoulder').value);
+            const alpha = parseFloat(document.getElementById('fitAlpha').value);
+
+            // Update UI labels & progress bars
+            document.getElementById('valHeight').textContent = `${H} cm`;
+            document.getElementById('valWeight').textContent = `${W} kg`;
+            document.getElementById('valShoulder').textContent = `${S} cm`;
+
+            document.getElementById('barHeight').style.width = `${((H - 150) / (195 - 150)) * 100}%`;
+            document.getElementById('barWeight').style.width = `${((W - 42) / (110 - 42)) * 100}%`;
+            document.getElementById('barShoulder').style.width = `${((S - 38) / (58 - 38)) * 100}%`;
+            document.getElementById('barAlpha').style.width = `${((alpha - 0.90) / (1.25 - 0.90)) * 100}%`;
+
+            let fitStyleLabel = 'Phom Hộp Chuẩn';
+            if (alpha < 0.98) fitStyleLabel = 'Gọn Vừa Vặn';
+            else if (alpha > 1.15) fitStyleLabel = 'Rộng Thụng Đường Phố';
+            document.getElementById('valAlpha').textContent = `${alpha.toFixed(2)} (${fitStyleLabel})`;
+
+            try {
+                // Evaluate Fit Score F and Drape Index D using math.js
+                const scope = { H, W, S, alpha, GSM: 360 };
+                const fitScore = math.evaluate('(W / sqrt(H * S)) * alpha + 0.12 * (S / 45)^2', scope);
+                const drapeIndex = math.evaluate('(GSM / 300) * log(1 + (H * S) / 1000) * (alpha ^ -0.5)', scope);
+
+                state.targetFitScore = fitScore;
+                state.targetDrapeScore = drapeIndex;
+                if (!fitAnimFrame) {
+                    fitAnimFrame = requestAnimationFrame(animateFitCounters);
+                }
+
+                // Determine Recommended Size & Garment Specs
+                let size = 'M';
+                let specs = { length: 71, chest: 61, shoulder: 55 };
+
+                if (fitScore < 0.82 && H < 168) {
+                    size = 'S';
+                    specs = { length: 68, chest: 58, shoulder: 53 };
+                } else if (fitScore < 0.93 && H < 176) {
+                    size = 'M';
+                    specs = { length: 71, chest: 61, shoulder: 55 };
+                } else if (fitScore < 1.08 && H < 185) {
+                    size = 'L';
+                    specs = { length: 74, chest: 64, shoulder: 58 };
+                } else {
+                    size = 'XL';
+                    specs = { length: 77, chest: 67, shoulder: 61 };
+                }
+
+                state.recommendedSize = size;
+                document.getElementById('recommendedSizeDisplay').textContent = `CỠ ${size}`;
+                document.getElementById('recommendedFitDesc').textContent = `${fitStyleLabel} // Tỷ lệ vai ${(S / specs.shoulder).toFixed(2)}`;
+                document.getElementById('specLength').textContent = `${specs.length} cm`;
+                document.getElementById('specChest').textContent = `${specs.chest} cm`;
+                document.getElementById('specShoulder').textContent = `${specs.shoulder} cm`;
+            } catch (err) {
+                console.error('Lỗi tính toán Math.js:', err);
+            }
+        }
+
+        function applyRecommendedSizeToFilter() {
+            PRODUCTS.forEach(p => {
+                state.selectedSizes[p.id] = state.recommendedSize;
+            });
+            renderCatalog();
+            showToast(`Đã đồng bộ toàn bộ sản phẩm sang CỠ ${state.recommendedSize}.`);
+        }
+
+        /* =========================================================================
+           6. SHOPPING CART & MATH.JS DYNAMIC BUNDLE PRICING
+           ========================================================================= */
+        function addToCart(productId, size) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = state.cart.find(item => item.id === productId && item.size === size);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                state.cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    size: size,
+                    qty: 1,
+                    img: product.imgPrimary
+                });
+            }
+
+            updateCartUI();
+            showToast(`Đã thêm ${product.name} (Cỡ ${size}) vào giỏ hàng.`);
+        }
+
+        function updateCartQty(index, delta) {
+            state.cart[index].qty += delta;
+            if (state.cart[index].qty <= 0) {
+                state.cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function applyPromoCode() {
+            const code = document.getElementById('promoCodeInput').value.trim().toUpperCase();
+            if (code === 'ZEN10') {
+                state.promoCode = 'ZEN10';
+                state.promoRate = 0.10;
+                showToast('Đã áp dụng mã ZEN10 (Giảm thêm 10% tổng giá trị đơn hàng).');
+            } else {
+                state.promoCode = null;
+                state.promoRate = 0;
+                showToast('Mã giảm giá không hợp lệ. Vui lòng thử mã: ZEN10');
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCountBadge').textContent = totalItems;
+            document.getElementById('drawerCartCount').textContent = totalItems;
+
+            const container = document.getElementById('cartItemsContainer');
+            if (state.cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center font-mono text-xs text-neutral-400">
+                        <i class="fa-solid fa-bag-shopping text-2xl mb-3"></i>
+                        <span>GIỎ HÀNG CỦA BẠN ĐANG TRỐNG.</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = state.cart.map((item, idx) => `
+                    <div class="flex gap-4 bg-white p-3.5 border border-neutral-200 rounded-sm smooth-ease">
+                        <img src="${item.img}" alt="${item.name}" class="w-16 h-20 object-cover bg-neutral-100 rounded-sm">
+                        <div class="flex-1 flex flex-col justify-between font-mono text-xs">
+                            <div>
+                                <div class="font-bold uppercase leading-tight">${item.name}</div>
+                                <div class="text-[10px] text-neutral-500 mt-0.5">KÍCH CỠ: ${item.size}</div>
+                            </div>
+                            <div class="flex items-center justify-between pt-2">
+                                <div class="flex items-center border border-neutral-300 rounded-sm">
+                                    <button onclick="updateCartQty(${idx}, -1)" class="px-2 py-0.5 hover:bg-neutral-100 smooth-ease">-</button>
+                                    <span class="px-2.5">${item.qty}</span>
+                                    <button onclick="updateCartQty(${idx}, 1)" class="px-2 py-0.5 hover:bg-neutral-100 smooth-ease">+</button>
+                                </div>
+                                <span class="font-bold">${formatVND(item.price * item.qty)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Calculate Subtotal & Dynamic Bundle Discount with math.js
+            const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const bundleRateExpr = totalItems >= 2 ? `min(0.22, 0.03 * ${totalItems} + ${state.promoRate})` : `${state.promoRate}`;
+            const discountRate = math.evaluate(bundleRateExpr);
+            const discountAmount = math.evaluate(`${subtotal} * ${discountRate}`);
+            const afterDiscount = math.evaluate(`${subtotal} - ${discountAmount}`);
+            const shipping = (afterDiscount >= 1500000 || afterDiscount === 0) ? 0 : 35000;
+            const finalTotal = math.evaluate(`${afterDiscount} + ${shipping}`);
+
+            document.getElementById('cartSubtotal').textContent = formatVND(subtotal);
+            document.getElementById('bundleDiscountLabel').textContent = `CHIẾT KHẤU (${Math.round(discountRate * 100)}%):`;
+            document.getElementById('cartDiscount').textContent = `-${formatVND(discountAmount)}`;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'MIỄN PHÍ' : formatVND(shipping);
+            document.getElementById('cartTotal').textContent = formatVND(finalTotal);
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            const backdrop = document.getElementById('cartDrawerBackdrop');
+            if (open) {
+                backdrop.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                backdrop.classList.add('hidden');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function handleCheckout() {
+            if (state.cart.length === 0) {
+                showToast('Giỏ hàng đang trống. Vui lòng chọn sản phẩm trước khi đặt hàng.');
+                return;
+            }
+            const orderCode = 'ZK-' + Math.floor(100000 + Math.random() * 900000);
+            state.cart = [];
+            updateCartUI();
+            toggleCartDrawer(false);
+            showToast(`Đặt hàng thành công! Mã đơn lưu trữ của bạn: ${orderCode}`);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        /* =========================================================================
+           7. HERO INTERACTIVE FABRIC MESH CANVAS (WITH SMOOTH LERP DAMPING)
+           ========================================================================= */
+        function initHeroCanvas() {
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let targetMouse = { x: -1000, y: -1000 };
+            let smoothMouse = { x: -1000, y: -1000 };
+            let tick = 0;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                width = canvas.width = rect.width;
+                height = canvas.height = rect.height;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                targetMouse.x = e.clientX - rect.left;
+                targetMouse.y = e.clientY - rect.top;
+                if (smoothMouse.x < -500) {
+                    smoothMouse.x = targetMouse.x;
+                    smoothMouse.y = targetMouse.y;
+                }
+                const coordsEl = document.getElementById('canvasCoords');
+                if (coordsEl) {
+                    coordsEl.textContent = `X:${String(Math.round(targetMouse.x)).padStart(3, '0')} Y:${String(Math.round(targetMouse.y)).padStart(3, '0')}`;
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                targetMouse.x = -1000;
+                targetMouse.y = -1000;
+            });
+
+            canvas.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    const rect = canvas.getBoundingClientRect();
+                    targetMouse.x = e.touches[0].clientX - rect.left;
+                    targetMouse.y = e.touches[0].clientY - rect.top;
+                }
+            }, { passive: true });
+
+            function animateHero() {
+                ctx.clearRect(0, 0, width, height);
+                tick += 0.015;
+
+                // Smooth linear interpolation (lerp) for silky 60fps cursor interaction
+                smoothMouse.x += (targetMouse.x - smoothMouse.x) * 0.12;
+                smoothMouse.y += (targetMouse.y - smoothMouse.y) * 0.12;
+
+                const cols = Math.floor(width / 42);
+                const rows = Math.floor(height / 42);
+                const spacingX = width / (cols || 1);
+                const spacingY = height / (rows || 1);
+
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.13)';
+                ctx.lineWidth = 1;
+
+                const points = [];
+                for (let r = 0; r <= rows; r++) {
+                    points[r] = [];
+                    for (let c = 0; c <= cols; c++) {
+                        let px = c * spacingX;
+                        let py = r * spacingY;
+
+                        const wave = Math.sin(c * 0.32 + tick) * 6.5 + Math.cos(r * 0.32 + tick) * 6.5;
+                        const dx = px - smoothMouse.x;
+                        const dy = py - smoothMouse.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        const maxRadius = 175;
+                        let pushX = 0;
+                        let pushY = 0;
+
+                        if (dist < maxRadius && dist > 0) {
+                            const falloff = Math.pow(1 - dist / maxRadius, 2);
+                            const force = falloff * 28;
+                            pushX = (dx / dist) * force;
+                            pushY = (dy / dist) * force;
+                        }
+
+                        points[r][c] = {
+                            x: px + pushX,
+                            y: py + wave + pushY
+                        };
+                    }
+                }
+
+                // Draw horizontal & vertical fabric threads
+                for (let r = 0; r <= rows; r++) {
+                    ctx.beginPath();
+                    for (let c = 0; c <= cols; c++) {
+                        const pt = points[r][c];
+                        if (c === 0) ctx.moveTo(pt.x, pt.y);
+                        else ctx.lineTo(pt.x, pt.y);
+                    }
+                    ctx.stroke();
+                }
+
+                for (let c = 0; c <= cols; c++) {
+                    ctx.beginPath();
+                    for (let r = 0; r <= rows; r++) {
+                        const pt = points[r][c];
+                        if (r === 0) ctx.moveTo(pt.x, pt.y);
+                        else ctx.lineTo(pt.x, pt.y);
+                    }
+                    ctx.stroke();
+                }
+
+                // Highlight intersection nodes near smooth cursor
+                for (let r = 0; r <= rows; r++) {
+                    for (let c = 0; c <= cols; c++) {
+                        const pt = points[r][c];
+                        const dist = Math.hypot(pt.x - smoothMouse.x, pt.y - smoothMouse.y);
+                        if (dist < 135) {
+                            ctx.fillStyle = '#d4ff00';
+                            ctx.fillRect(pt.x - 2, pt.y - 2, 4, 4);
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animateHero);
+            }
+
+            animateHero();
+        }
+
+        /* =========================================================================
+           8. 1-OF-1 APPAREL CUSTOMIZER STUDIO CANVAS (SMOOTH ANIMATED TRANSITIONS)
+           ========================================================================= */
+        let customAnimFrame = null;
+
+        function setCustomGarmentColor(hex, name) {
+            state.customGarmentColor = hex;
+            state.customColorName = name;
+            triggerCustomizerLoop();
+        }
+
+        function setCustomPatternMode(mode) {
+            state.customPatternMode = mode;
+            document.querySelectorAll('.pattern-mode-btn').forEach(btn => {
+                btn.className = 'pattern-mode-btn py-2 border border-neutral-300 bg-white text-zen-black rounded-sm uppercase text-[10px] smooth-ease';
+            });
+            const activeBtn = document.getElementById('mode-' + mode);
+            if (activeBtn) {
+                activeBtn.className = 'pattern-mode-btn py-2 border border-zen-black bg-zen-black text-white rounded-sm uppercase text-[10px] smooth-ease';
+            }
+            triggerCustomizerLoop();
+        }
+
+        function randomizeCustomCanvas() {
+            state.customSeed = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('customSerialId').textContent = `MÃ ĐỘC BẢN #ZK-${state.customSeed}`;
+            const randomDensity = Math.floor(12 + Math.random() * 34);
+            document.getElementById('customDensity').value = randomDensity;
+            updateCustomizerTarget();
+        }
+
+        function updateCustomizerTarget() {
+            const density = parseInt(document.getElementById('customDensity').value, 10) || 24;
+            state.customTargetDensity = density;
+            document.getElementById('customDensityVal').textContent = `${density} Điểm Nút`;
+            triggerCustomizerLoop();
+        }
+
+        function triggerCustomizerLoop() {
+            if (!customAnimFrame) {
+                customAnimFrame = requestAnimationFrame(animateCustomizerStep);
+            }
+        }
+
+        function animateCustomizerStep() {
+            const diff = state.customTargetDensity - state.customAnimDensity;
+            state.customPhase += 0.06;
+            if (Math.abs(diff) > 0.08) {
+                state.customAnimDensity += diff * 0.2;
+                renderCustomizerCanvas();
+                customAnimFrame = requestAnimationFrame(animateCustomizerStep);
+            } else {
+                state.customAnimDensity = state.customTargetDensity;
+                renderCustomizerCanvas();
+                customAnimFrame = null;
+            }
+        }
+
+        function renderCustomizerCanvas() {
+            const canvas = document.getElementById('customizerCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const density = Math.round(state.customAnimDensity);
+            const inscription = (document.getElementById('customTextInput').value || 'ZENKENITH').toUpperCase();
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Background studio grid
+            ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < w; i += 25) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke();
+            }
+
+            // Draw Oversized Boxy Tee Silhouette
+            ctx.save();
+            ctx.fillStyle = state.customGarmentColor;
+            ctx.strokeStyle = state.customGarmentColor === '#e8e6df' ? '#0a0a0a' : 'rgba(255,255,255,0.28)';
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(175, 65);
+            ctx.quadraticCurveTo(250, 92, 325, 65);
+            ctx.lineTo(445, 130);
+            ctx.lineTo(415, 220);
+            ctx.lineTo(360, 195);
+            ctx.lineTo(360, 435);
+            ctx.lineTo(140, 435);
+            ctx.lineTo(140, 195);
+            ctx.lineTo(85, 220);
+            ctx.lineTo(55, 130);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Ribbed Collar Seam Detail
+            ctx.beginPath();
+            ctx.moveTo(165, 72);
+            ctx.quadraticCurveTo(250, 105, 335, 72);
+            ctx.stroke();
+
+            // Clip Generative Art Inside Chest Print Zone
+            const printX = 175, printY = 140, printW = 150, printH = 195;
+            ctx.strokeStyle = state.customGarmentColor === '#e8e6df' ? '#141414' : '#f5f5f5';
+            ctx.fillStyle = state.customGarmentColor === '#e8e6df' ? '#141414' : '#f5f5f5';
+
+            // Frame border
+            ctx.strokeRect(printX, printY, printW, printH);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(printX, printY, printW, printH);
+            ctx.clip();
+
+            const seed = state.customSeed;
+            if (state.customPatternMode === 'monolith') {
+                for (let i = 0; i < density; i++) {
+                    const offset = ((i * 37 + seed) % printH);
+                    ctx.lineWidth = (i % 4 === 0) ? 2.5 : 0.8;
+                    ctx.beginPath();
+                    ctx.moveTo(printX + 10, printY + offset);
+                    ctx.lineTo(printX + printW - 10, printY + ((offset + i * 13) % printH));
+                    ctx.stroke();
+                }
+            } else if (state.customPatternMode === 'topography') {
+                for (let i = 0; i < density; i++) {
+                    ctx.beginPath();
+                    const yBase = printY + (i / density) * printH;
+                    for (let x = 0; x <= printW; x += 6) {
+                        const y = yBase + Math.sin((x * 0.06) + i * 0.4 + seed + state.customPhase * 0.25) * 14;
+                        if (x === 0) ctx.moveTo(printX + x, y);
+                        else ctx.lineTo(printX + x, y);
+                    }
+                    ctx.stroke();
+                }
+            } else {
+                const cx = printX + printW / 2;
+                const cy = printY + printH / 2;
+                for (let i = 1; i <= density; i++) {
+                    const radius = (i / density) * 85;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, radius, (seed + i) * 0.2, (seed + i) * 0.2 + Math.PI * 1.35);
+                    ctx.stroke();
+                }
+            }
+            ctx.restore();
+
+            // Print Typography Branding below graphic box
+            ctx.font = 'bold 10px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(inscription, 250, 355);
+            ctx.font = '8px "JetBrains Mono", monospace';
+            ctx.fillText(`ZENKENITH® LƯU TRỮ // #ZK-${state.customSeed}`, 250, 370);
+
+            ctx.restore();
+        }
+
+        function addCustomPieceToCart() {
+            const canvas = document.getElementById('customizerCanvas');
+            const size = document.getElementById('customSizeSelect').value;
+            const inscription = (document.getElementById('customTextInput').value || 'ĐƠN THẠCH').toUpperCase();
+            const customId = `zk-custom-${state.customSeed}`;
+
+            state.cart.push({
+                id: customId,
+                name: `ÁO ĐỘC BẢN 1-1 [${inscription}] #ZK-${state.customSeed}`,
+                price: 980000,
+                size: size,
+                qty: 1,
+                img: canvas.toDataURL('image/png')
+            });
+
+            updateCartUI();
+            toggleCartDrawer(true);
+            showToast(`Đã chế tác và thêm áo độc bản #ZK-${state.customSeed} vào giỏ hàng!`);
+        }
+
+        /* =========================================================================
+           9. INITIALIZE APPLICATION ON WINDOW LOAD
+           ========================================================================= */
+        window.onload = function () {
+            renderCatalog();
+            calculateAlgorithmicFit();
+            updateCartUI();
+            initHeroCanvas();
+            renderCustomizerCanvas();
+        };
+    </script>
+</body>
+</html>

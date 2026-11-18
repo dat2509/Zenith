@@ -1,0 +1,102 @@
+/* Thiết lập chung */
+body {
+  background-color: #F5F4F0;
+  color: #0A0A0A;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Chạy chữ thanh thông báo trên cùng (Marquee) */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Chuyển động mượt chuẩn Luxury Streetwear */
+.smooth-transition {
+  transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* Hiệu ứng lướt chuột đổi ảnh sản phẩm mượt mà */
+.product-card .img-primary,
+.product-card .img-secondary {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.product-card:hover .img-primary {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.product-card:hover .img-secondary {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+/* Thanh trượt tùy chỉnh (Range Slider) */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #D4D4D8;
+  height: 4px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #0A0A0A;
+  border: 2px solid #C8FF00;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.22);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #0A0A0A;
+  border: 2px solid #C8FF00;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.22);
+}
+
+/* Thanh cuộn tối giản */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F4F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0A0A0A;
+}
